@@ -1,0 +1,2 @@
+include LICENSE NOTICE THIRD_PARTY_LICENSES.md
+recursive-include licenses *

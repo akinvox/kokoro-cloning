@@ -1,0 +1,12 @@
+AkinVox Kokoro Cloning v1
+Copyright 2026 AkinVox
+
+This distribution includes inference components adapted from StyleTTS 2
+by Aaron (Yinghao) Li (MIT), including its iSTFTNet integration, and uses
+Kokoro by hexgrad (Apache-2.0). Modifications include the inference-only
+reference mapper, LoRA loading and switching, asset verification, and CLI/demo.
+Original notices are retained in licenses/ and THIRD_PARTY_LICENSES.md.
+
+Kokoro and WavLM model weights are fetched separately from their pinned
+upstream repositories. Third-party software and weights retain their licenses.
+
