@@ -292,7 +292,6 @@ class SourceModuleHnNSF(torch.nn.Module):
         super(SourceModuleHnNSF, self).__init__()
 
         self.sine_amp = sine_amp
-        self.noise_std = add_noise_std
 
         # to produce sine waveforms
         self.l_sin_gen = SineGen(
@@ -379,7 +378,7 @@ class Generator(torch.nn.Module):
 
             c_cur = upsample_initial_channel // (2 ** (i + 1))
 
-            if i + 1 < len(upsample_rates):  #
+            if i + 1 < len(upsample_rates):
                 stride_f0 = np.prod(upsample_rates[i + 1 :])
                 self.noise_convs.append(
                     Conv1d(
@@ -520,9 +519,7 @@ class Decoder(nn.Module):
     def __init__(
         self,
         dim_in=512,
-        F0_channel=512,
         style_dim=64,
-        dim_out=80,
         resblock_kernel_sizes=[3, 7, 11],
         upsample_rates=[10, 6],
         upsample_initial_channel=512,

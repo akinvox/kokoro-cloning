@@ -68,7 +68,6 @@
       "clone": "samples/story_clone.wav",
       "same_text": false,
       "detected_reference_speech_seconds": 6.754,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "b79f14eb67de7bbf0c7e22163620922e883b1ac85f5ea9fe304eb97a5b44c494",
       "seconds": 8.25,
       "sample_rate": 24000,
@@ -87,7 +86,6 @@
       "clone": "samples/dialogue_clone.wav",
       "same_text": false,
       "detected_reference_speech_seconds": 6.754,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "7f466c3ab87853e72f7ce9789916a7209241d751e7c4ce551780c2a5a1b808fc",
       "seconds": 7.925,
       "sample_rate": 24000,
@@ -106,7 +104,6 @@
       "clone": "samples/longer_clone.wav",
       "same_text": false,
       "detected_reference_speech_seconds": 6.754,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "d83a1f953515f45c22023bfe4f4cf9a49f87f9de3f23753ef622a4a7b03be19b",
       "seconds": 13.35,
       "sample_rate": 24000,
@@ -125,7 +122,6 @@
       "clone": "samples/explanation_clone.wav",
       "same_text": false,
       "detected_reference_speech_seconds": 5.882,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "f74e023e02c96ae4a29d4fc3a580c0a72c246223e86be92574869465e0d7a895",
       "seconds": 8.825,
       "sample_rate": 24000,
@@ -144,7 +140,6 @@
       "clone": "samples/questions_clone.wav",
       "same_text": false,
       "detected_reference_speech_seconds": 5.882,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "725976b6c34d4e2ef97cc6fe23f086b9d206a7243a4ca4159a5f8b00f7af4638",
       "seconds": 8.3,
       "sample_rate": 24000,
@@ -163,7 +158,6 @@
       "clone": "samples/whisper_clone_v2.wav",
       "same_text": true,
       "detected_reference_speech_seconds": 9.538,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "26aef827393edc3b3dbd831c5a2f285f1eef337ea7ab559d1fe499d76ac3e748",
       "seconds": 11.125,
       "sample_rate": 24000,
@@ -182,7 +176,6 @@
       "clone": "samples/accent_clone.wav",
       "same_text": true,
       "detected_reference_speech_seconds": 5.4,
-      "status": "RENDERED_FOR_LISTENING",
       "sha256": "691a5bdcf7db936e4b07088292a372565c7bc59eb9bcc032f9900213156538b4",
       "seconds": 7.025,
       "sample_rate": 24000,
@@ -190,9 +183,5 @@
       "clipped_fraction": 0.0
     }
   ],
-  "seconds": 101.1853129863739,
-  "optimizer_updates": 0,
-  "gpu_used": false,
-  "qualification": "Illustrative examples for listening, not a broad identity or accent benchmark",
-  "neutral_reference_revision": 2
+  "qualification": "Illustrative examples for listening, not a broad identity or accent benchmark"
 }

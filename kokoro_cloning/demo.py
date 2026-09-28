@@ -21,11 +21,13 @@ def build_demo(*, device="cpu", model_dir=None, base_dir=None, wavlm_dir=None):
         )
 
     def generate(mode, audio, transcript, text, voice):
-        if not text or len(text) > 2000:
+        if not isinstance(text, str) or not text.strip() or len(text) > 2000:
             raise gr.Error(
                 "Enter a short sentence or paragraph (up to 2,000 characters)."
             )
-        if mode == "Clone reference" and (not audio or not transcript.strip()):
+        if mode == "Clone reference" and (
+            not audio or not isinstance(transcript, str) or not transcript.strip()
+        ):
             raise gr.Error("Upload a reference and enter its exact transcript.")
         try:
             with lock:

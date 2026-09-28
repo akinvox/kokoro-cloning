@@ -1,5 +1,4 @@
 {
-  "status": "RENDERED",
   "release_update": 100000,
   "seed": 20260926,
   "expressive_detected_speech_seconds": 9.794,
@@ -117,6 +116,5 @@
       "clipped_fraction": 0.0
     }
   },
-  "all_audio_synthetic": true,
-  "optimizer_updates": 0
+  "all_audio_synthetic": true
 }

@@ -7,7 +7,7 @@ def predict_speech(
     (text, lengths, mask) = (common["text"], common["lengths"], common["text_mask"])
     plbert = model.bert(text, attention_mask=(~mask).int())
     duration_embedding = model.bert_encoder(plbert).transpose(-1, -2)
-    duration_embedding = mapper.shared.prosody(duration_embedding, mask, prompt)
+    duration_embedding = mapper.prosody(duration_embedding, mask, prompt)
     duration_context = model.predictor.text_encoder(
         duration_embedding, s_pred, lengths, mask
     )
@@ -21,7 +21,7 @@ def predict_speech(
         predicted_prosody, s_pred
     )
     content = model.text_encoder(text, lengths, mask)
-    content = mapper.shared.content(content, mask, prompt)
+    content = mapper.content(content, mask, prompt)
     full_wave = helper.safe_wave(
         model.decoder(content @ alignment, predicted_f0, predicted_n, s_dec).float()
     ).squeeze()

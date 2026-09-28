@@ -184,7 +184,7 @@ symbols = [
 ]
 # fmt: on
 
-# Build symbol-to-ID lookup dict (same interface as StyleTTS2's TextCleaner)
+# Keep token indices identical to the pretrained embedding table.
 dicts = {sym: i for i, sym in enumerate(symbols)}
 
 
@@ -193,9 +193,9 @@ def unknown_symbols(text):
 
 
 class TextCleaner:
-    """Drop-in replacement for StyleTTS2's TextCleaner using Kokoro vocab."""
+    """Convert phonemes to the token IDs expected by Kokoro."""
 
-    def __init__(self, dummy=0, strict=True):
+    def __init__(self, strict=True):
         self.word_index_dictionary = dicts
         self.strict = strict
 

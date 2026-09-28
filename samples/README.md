@@ -1,9 +1,8 @@
 # Quick listening comparison
 
-All references and outputs here are **synthetic audio**. Every clone uses the
-released 100k production adapter, seed `20260926`, normal reference enrollment
-and fully predicted duration, F0, excitation and content. There is no oracle
-conditioning, editing, time stretching or loudness matching of clone output.
+All audio is synthetic. Clones use the v1 model with seed `20260926`.
+The players compare each reference with the generated speech; transcripts
+and file checksums are included alongside the audio.
 
 | Example | Reference | Clone | What to compare |
 |---|---|---|---|
@@ -32,7 +31,7 @@ environments. `sample_manifest.json` records the distributed files and hashes.
 
 ## Five additional new-text examples
 
-Five examples from two non-stock synthetic voices; listening examples, not a broad quality benchmark.
+Five new-text examples using two synthetic Qwen voices.
 
 | Example | Reference | Clone | Listen for |
 |---|---|---|---|

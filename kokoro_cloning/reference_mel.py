@@ -1,10 +1,13 @@
+"""Reference mel features expected by the released acoustic encoders."""
+
 import torch
 import torchaudio
 
 mean = -4
 std = 4
+# The checkpoint expects this filterbank setting even for 24 kHz input audio.
 to_mel = torchaudio.transforms.MelSpectrogram(
-    n_mels=80, n_fft=2048, win_length=1200, hop_length=300
+    sample_rate=16000, n_mels=80, n_fft=2048, win_length=1200, hop_length=300
 )
 
 

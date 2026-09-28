@@ -7,7 +7,6 @@ import random
 import re
 import threading
 from pathlib import Path
-from types import SimpleNamespace
 
 import numpy as np
 import soundfile as sf
@@ -309,7 +308,7 @@ class KokoroCloner:
                 self.common(phones),
                 style[:, :128],
                 style[:, 128:],
-                SimpleNamespace(shared=self.mapper),
+                self.mapper,
                 prompt,
             )
             if not all(torch.isfinite(v).all() for v in got.values()):

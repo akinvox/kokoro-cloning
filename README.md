@@ -108,7 +108,7 @@ We adapted Kokoro using LoRA while keeping its original backbone tensors frozen.
 
 ## Limitations
 
-- This v1 release is qualified for **English cloning**. German multispeaker work is a separate release; German reference cloning is not claimed here.
+- V1 supports **English voice cloning**.
 - Strong emotion, shouting, whispering, singing and highly expressive references can be difficult to follow. Identity, accent and delivery may drift.
 - Noise, music, several speakers, very short references and inaccurate transcripts reduce quality. The speech detector may reject weak or unusual speech; try a longer clean recording.
 - Names, unusual words and punctuation may need spelling adjustments. Split long passages into sentences; each request must fit the model's 510-token limit.

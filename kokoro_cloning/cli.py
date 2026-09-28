@@ -61,6 +61,24 @@ def main():
             if args.text is not None
             else args.text_file.read_text(encoding="utf-8")
         )
+        if not text.strip():
+            raise ValueError("Text must not be empty")
+        inputs = [args.reference, args.reference_text_file, args.text_file]
+        for path in inputs:
+            if path is not None:
+                if not path.is_file():
+                    raise ValueError(f"Input file does not exist: {path}")
+                if path.resolve() == args.output.resolve():
+                    raise ValueError("Output must be different from the input files")
+        transcript = None
+        if args.adapter == "on":
+            transcript = (
+                args.reference_text
+                if args.reference_text is not None
+                else args.reference_text_file.read_text(encoding="utf-8")
+            )
+            if not transcript.strip():
+                raise ValueError("Reference transcript must not be empty")
         model = KokoroCloner(
             args.model_dir,
             base_dir=args.base_dir,
@@ -71,11 +89,6 @@ def main():
         model.set_adapter_enabled(args.adapter == "on")
         kwargs = dict(seed_value=args.seed)
         if args.adapter == "on":
-            transcript = (
-                args.reference_text
-                if args.reference_text is not None
-                else args.reference_text_file.read_text(encoding="utf-8")
-            )
             print("Reading reference and creating voice conditioning...", flush=True)
             kwargs["reference"] = model.enroll(args.reference, transcript)
         else:
