@@ -1,41 +1,33 @@
 # Listening comparisons
 
-Every example has three players: **reference**, **clone · same words**, and
-**clone · new words**. All audio is synthetic. Clones use the released 100k
-model with seed `20260926` and normal reference enrollment.
+Each example has its own synthetic voice and passage. Play the reference,
+the same-sentence clone, then the different-sentence clone.
 
-| Example | Reference | Same words | New words |
+| Example | Reference | Same sentence | Different sentence |
 |---|---|---|---|
-| Clean neutral | [Reference](../examples/reference.wav) | [Clone](neutral_same_text.wav) | [Clone](neutral_clone.wav) |
-| Story narration | [Reference](warm_reference.wav) | [Clone](warm_same_text.wav) | [Clone](story_clone.wav) |
-| Dialogue | [Reference](warm_reference.wav) | [Clone](warm_same_text.wav) | [Clone](dialogue_clone.wav) |
-| Longer passage | [Reference](warm_reference.wav) | [Clone](warm_same_text.wav) | [Clone](longer_clone.wav) |
-| Explanation | [Reference](clear_reference.wav) | [Clone](clear_same_text.wav) | [Clone](explanation_clone.wav) |
-| Questions | [Reference](clear_reference.wav) | [Clone](clear_same_text.wav) | [Clone](questions_clone.wav) |
-| Expression | [Reference](expressive_reference_v2.wav) | [Clone](expressive_same_text_v2.wav) | [Clone](expressive_new_text_v2.wav) |
-| Whispering | [Reference](whisper_reference_v2.wav) | [Clone](whisper_clone_v2.wav) | [Clone](whisper_new_text.wav) |
-| Accent | [Reference](australian_reference.wav) | [Clone](accent_clone.wav) | [Clone](accent_new_text.wav) |
+| Warm narration | [Reference](story_reference.wav) | [Clone](story_same.wav) | [Clone](story_new.wav) |
+| Lively dialogue | [Reference](dialogue_reference.wav) | [Clone](dialogue_same.wav) | [Clone](dialogue_new.wav) |
+| A longer passage | [Reference](longer_reference.wav) | [Clone](longer_same.wav) | [Clone](longer_new.wav) |
+| Factual explanation | [Reference](explanation_reference.wav) | [Clone](explanation_same.wav) | [Clone](explanation_new.wav) |
+| Questions and answers | [Reference](questions_reference.wav) | [Clone](questions_same.wav) | [Clone](questions_new.wav) |
+| Quick-start example | [Reference](../examples/reference.wav) | [Clone](neutral_same.wav) | [Clone](neutral_new.wav) |
+| Expressive delivery | [Reference](expression_reference.wav) | [Clone](expression_same.wav) | [Clone](expression_new.wav) |
+| Whisper preservation | [Reference](whisper_reference.wav) | [Clone](whisper_same.wav) | [Clone](whisper_new.wav) |
+| Accent preservation | [Reference](accent_reference.wav) | [Clone](accent_same.wav) | [Clone](accent_new.wav) |
 
-The same-word player uses the reference transcript. It helps reveal differences
-in pronunciation, timing and delivery. The new-word player shows how the voice
-carries onto another passage. Examples sharing a reference also share its
-same-word clone.
+The strength samples are selected examples. Similarity varies with the reference.
+The weakness examples show drift in expression, whispering and accents.
 
-Compare voice character and clarity across the narration examples. Expression,
-whispering and accent examples show limitations: pauses and emphasis can drift,
-whispers can become voiced speech, and the original accent may not carry over.
-These examples are not a broad speaker benchmark.
+All references are AI-generated: the quick-start voice uses stock Kokoro
+`af_heart`; the other voices use [Qwen3-TTS VoiceDesign](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign). `sample_manifest.json`
+records their provenance, transcripts, selected seeds and audio checksums.
 
-The neutral reference uses original Kokoro `af_heart`. Other references were
-made with [Qwen3-TTS VoiceDesign](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign).
-Transcripts are included beside the WAVs; `expanded_samples.json` records source
-provenance and target texts, and `sample_manifest.json` lists audio checksums.
-
-After following the main installation guide, generate both versions:
+After following the main installation guide, reproduce a pair:
 
 ```bash
-kokoro-clone --reference samples/warm_reference.wav --reference-text-file samples/warm_reference.txt --text-file samples/warm_reference.txt --output same_words.wav
-kokoro-clone --reference samples/warm_reference.wav --reference-text-file samples/warm_reference.txt --text-file samples/story_text.txt --output new_words.wav
+kokoro-clone --reference samples/dialogue_reference.wav --reference-text-file samples/dialogue_reference.txt --text-file samples/dialogue_reference.txt --output same_sentence.wav
+kokoro-clone --reference samples/dialogue_reference.wav --reference-text-file samples/dialogue_reference.txt --text-file samples/dialogue_new.txt --seed 20260927 --output different_sentence.wav
 ```
 
+Use the seed recorded in the manifest for each selected new-text sample.
 Waveforms can differ across hardware and software versions.

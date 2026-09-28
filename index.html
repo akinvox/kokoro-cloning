@@ -188,118 +188,34 @@ footer {
     A different story.
    </h1>
    <p>
-    Listen to the reference, then clones of the same words and different words. These examples use the released 100k adapter with predicted speech controls. No merged weights or hand-edited clone audio.
+    Each example uses a different synthetic voice and passage. Listen to the reference, its same-sentence clone, then different words. Strength clips are selected examples from the released 100k model.
    </p>
    <small>
     All recordings on this page are AI-generated, including the references. These are small illustrative examples, not an unseen-human-speaker benchmark.
    </small>
   </header>
-  <section aria-labelledby="neutral" class="section">
-   <div class="eyebrow">
-    01 / Clear reference · same and new words
-   </div>
-   <h2 id="neutral">
-    A straightforward first listen
+  <section aria-labelledby="strength" class="section">
+   <h2 id="strength">
+    Strengths
    </h2>
-   <p class="note">
-    This clean, neutral reference is also included in the quick-start guide. Compare the voice character on the same sentence and a different sentence. It demonstrates the reference-to-new-text workflow; it does not establish reliable cloning of every speaker.
-   </p>
-   <div class="players three">
-    <figure>
-     <figcaption>
-      Reference · original Kokoro
-     </figcaption>
-     <small>
-      Synthetic · af_heart
-     </small>
-     <audio controls="" preload="none" src="examples/reference.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="examples/reference.wav">
-      Download reference
-     </a>
-     <details>
-      <summary>
-       Reference transcript
-      </summary>
-      <p>
-       I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.
-      </p>
-     </details>
-    </figure>
-    <figure>
-     <figcaption>
-      Clone · same words
-     </figcaption>
-     <small>
-      AkinVox v1 · adapter on
-     </small>
-     <audio controls="" preload="none" src="samples/neutral_same_text.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="samples/neutral_same_text.wav">
-      Download clone
-     </a>
-     <details>
-      <summary>
-       Generated text
-      </summary>
-      <p>
-       I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.
-      </p>
-     </details>
-    </figure>
-    <figure>
-     <figcaption>
-      Clone · new sentence
-     </figcaption>
-     <small>
-      AkinVox v1 · adapter on
-     </small>
-     <audio controls="" preload="none" src="samples/neutral_clone.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="samples/neutral_clone.wav">
-      Download clone
-     </a>
-     <details>
-      <summary>
-       Generated text
-      </summary>
-      <p>
-       Welcome to AkinVox. Today, we are trying a new voice and telling a different story.
-      </p>
-     </details>
-    </figure>
-   </div>
-  </section>
-  <section aria-labelledby="strength-more" class="section expanded-strength">
-   <div class="eyebrow">
-    More listening examples
-   </div>
-   <h2 id="strength-more">
-    Five more new-text examples
-   </h2>
-   <p class="note">
-    Five short demonstrations using two non-stock synthetic reference voices. Listen for narration, dialogue, longer-passage consistency, explanation and question phrasing. These are examples for your judgment, not claims that every voice or delivery transfers perfectly. Expand an example to hear its reference, same-word clone and new-word clone together.
-   </p>
-   <details class="comparison">
+   <details class="comparison" open="">
     <summary>
      <strong>
-      Story narration
+      Warm narration
      </strong>
+     · Warm British woman
     </summary>
     <p class="note">
-     Listen for a consistent voice through descriptive narration.
+     Listen for the voice character and relaxed storytelling rhythm.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_reference.wav">
+      <audio controls="" preload="none" src="samples/story_reference.wav">
       </audio>
-      <a href="samples/warm_reference.wav">
+      <a href="samples/story_reference.wav">
        Download audio
       </a>
       <details>
@@ -313,11 +229,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_same_text.wav">
+      <audio controls="" preload="none" src="samples/story_same.wav">
       </audio>
-      <a href="samples/warm_same_text.wav">
+      <a href="samples/story_same.wav">
        Download audio
       </a>
       <details>
@@ -331,11 +247,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/story_clone.wav">
+      <audio controls="" preload="none" src="samples/story_new.wav">
       </audio>
-      <a href="samples/story_clone.wav">
+      <a href="samples/story_new.wav">
        Download audio
       </a>
       <details>
@@ -352,20 +268,21 @@ footer {
    <details class="comparison">
     <summary>
      <strong>
-      Quoted dialogue
+      Lively dialogue
      </strong>
+     · Bright American woman
     </summary>
     <p class="note">
-     Listen for readable phrasing around quoted speech. This is one voice reading both characters.
+     Listen for questions, replies and changing emphasis. One voice reads both characters.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_reference.wav">
+      <audio controls="" preload="none" src="samples/dialogue_reference.wav">
       </audio>
-      <a href="samples/warm_reference.wav">
+      <a href="samples/dialogue_reference.wav">
        Download audio
       </a>
       <details>
@@ -373,17 +290,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        Did you leave the tickets on the table? she asked. I put them in your bag, he replied. Then we had better catch that train.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_same_text.wav">
+      <audio controls="" preload="none" src="samples/dialogue_same.wav">
       </audio>
-      <a href="samples/warm_same_text.wav">
+      <a href="samples/dialogue_same.wav">
        Download audio
       </a>
       <details>
@@ -391,17 +308,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        Did you leave the tickets on the table? she asked. I put them in your bag, he replied. Then we had better catch that train.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/dialogue_clone.wav">
+      <audio controls="" preload="none" src="samples/dialogue_new.wav">
       </audio>
-      <a href="samples/dialogue_clone.wav">
+      <a href="samples/dialogue_new.wav">
        Download audio
       </a>
       <details>
@@ -409,7 +326,7 @@ footer {
         Transcript
        </summary>
        <p>
-        You brought the map, she said. Of course I did, he replied, although he had completely forgotten where he put it.
+        You brought the map? she asked. Of course I did, he replied. Then why are we walking in circles? For a moment, neither of them said a word.
        </p>
       </details>
      </figure>
@@ -418,20 +335,21 @@ footer {
    <details class="comparison">
     <summary>
      <strong>
-      Several sentences
+      A longer passage
      </strong>
+     · Low, mature British man
     </summary>
     <p class="note">
-     Listen for voice consistency across a longer three-sentence passage.
+     Listen for a consistent voice and clear phrasing through a sustained passage.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_reference.wav">
+      <audio controls="" preload="none" src="samples/longer_reference.wav">
       </audio>
-      <a href="samples/warm_reference.wav">
+      <a href="samples/longer_reference.wav">
        Download audio
       </a>
       <details>
@@ -439,17 +357,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        The ferry left the harbour just after dawn. Daniel watched the houses shrink behind him. By the time the sun reached the hills, the island was only a distant line.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/warm_same_text.wav">
+      <audio controls="" preload="none" src="samples/longer_same.wav">
       </audio>
-      <a href="samples/warm_same_text.wav">
+      <a href="samples/longer_same.wav">
        Download audio
       </a>
       <details>
@@ -457,17 +375,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        The ferry left the harbour just after dawn. Daniel watched the houses shrink behind him. By the time the sun reached the hills, the island was only a distant line.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/longer_clone.wav">
+      <audio controls="" preload="none" src="samples/longer_new.wav">
       </audio>
-      <a href="samples/longer_clone.wav">
+      <a href="samples/longer_new.wav">
        Download audio
       </a>
       <details>
@@ -475,7 +393,7 @@ footer {
         Transcript
        </summary>
        <p>
-        Rain tapped softly against the window. Maya set her cup beside the open book and turned another page. Outside, the town was waking up, but she was in no hurry to leave the story behind.
+        Rain tapped softly against the window. Daniel set his cup beside the open book and turned another page. Outside, the town was waking up. A delivery van stopped near the bakery, and someone called a greeting across the street. He had planned to leave an hour ago, but the letter on the table had changed everything. He read the final line once more, folded the paper carefully, and reached for his coat. This time, he knew exactly where he needed to go.
        </p>
       </details>
      </figure>
@@ -484,20 +402,21 @@ footer {
    <details class="comparison">
     <summary>
      <strong>
-      Clear explanation
+      Factual explanation
      </strong>
+     · Clear American man
     </summary>
     <p class="note">
-     Compare the lower voice character while it explains something in new words.
+     Listen for distinct words, numbers and steady instructional delivery.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/clear_reference.wav">
+      <audio controls="" preload="none" src="samples/explanation_reference.wav">
       </audio>
-      <a href="samples/clear_reference.wav">
+      <a href="samples/explanation_reference.wav">
        Download audio
       </a>
       <details>
@@ -505,17 +424,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        A compass needle points towards magnetic north. When you turn the map to match it, the landmarks around you become much easier to identify.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/clear_same_text.wav">
+      <audio controls="" preload="none" src="samples/explanation_same.wav">
       </audio>
-      <a href="samples/clear_same_text.wav">
+      <a href="samples/explanation_same.wav">
        Download audio
       </a>
       <details>
@@ -523,17 +442,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        A compass needle points towards magnetic north. When you turn the map to match it, the landmarks around you become much easier to identify.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/explanation_clone.wav">
+      <audio controls="" preload="none" src="samples/explanation_new.wav">
       </audio>
-      <a href="samples/explanation_clone.wav">
+      <a href="samples/explanation_new.wav">
        Download audio
       </a>
       <details>
@@ -541,7 +460,7 @@ footer {
         Transcript
        </summary>
        <p>
-        A good audiobook lets you carry a story into everyday life. You can listen while walking, cooking, or taking a quiet break at the end of the day.
+        Set the timer for twenty minutes and place the tray on the middle shelf. The warm air circulates around the food, helping it cook evenly. Leave a little space between each piece so the heat can reach every side.
        </p>
       </details>
      </figure>
@@ -552,18 +471,19 @@ footer {
      <strong>
       Questions and answers
      </strong>
+     · Light, youthful American man
     </summary>
     <p class="note">
-     Listen for clear words and how the voice handles questions and sentence boundaries.
+     Listen for changes in intonation between questions and answers.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/clear_reference.wav">
+      <audio controls="" preload="none" src="samples/questions_reference.wav">
       </audio>
-      <a href="samples/clear_reference.wav">
+      <a href="samples/questions_reference.wav">
        Download audio
       </a>
       <details>
@@ -571,17 +491,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        Why does the moon look larger near the horizon? Is it really closer to us? The answer has more to do with perception than distance.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/clear_same_text.wav">
+      <audio controls="" preload="none" src="samples/questions_same.wav">
       </audio>
-      <a href="samples/clear_same_text.wav">
+      <a href="samples/questions_same.wav">
        Download audio
       </a>
       <details>
@@ -589,17 +509,17 @@ footer {
         Transcript
        </summary>
        <p>
-        The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.
+        Why does the moon look larger near the horizon? Is it really closer to us? The answer has more to do with perception than distance.
        </p>
       </details>
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/questions_clone.wav">
+      <audio controls="" preload="none" src="samples/questions_new.wav">
       </audio>
-      <a href="samples/questions_clone.wav">
+      <a href="samples/questions_new.wav">
        Download audio
       </a>
       <details>
@@ -607,119 +527,107 @@ footer {
         Transcript
        </summary>
        <p>
-        Where does the path lead? Nobody in the village could agree. Some said it ended at the lake, while others were certain it reached the mountains.
+        Is the bridge still open? Can we cross before sunset? Yes, said the guide, but we should leave now. What happens if the weather changes? Then we take the sheltered path through the trees.
        </p>
       </details>
      </figure>
     </div>
    </details>
   </section>
-  <section aria-labelledby="expressive" class="section">
-   <div class="eyebrow">
-    02 / Expressive reference · stress test
-   </div>
-   <h2 id="expressive">
-    Where v1 has more work to do
+  <section aria-labelledby="quickstart" class="section">
+   <h2 id="quickstart">
+    Quick-start example
    </h2>
-   <p class="note">
-    A slow, soft reference with deliberate pauses and stretched words. Listen for differences in pace, breathiness, emphasis and voice identity. The same-text clone makes delivery differences easier to hear; the new-text clone shows how the reference carries onto other words. Highly expressive delivery is a known v1 limitation.
-   </p>
-   <div class="players three">
-    <figure>
-     <figcaption>
-      Expressive reference
-     </figcaption>
-     <small>
-      Synthetic · Qwen VoiceDesign
-     </small>
-     <audio controls="" preload="none" src="samples/expressive_reference_v2.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="samples/expressive_reference_v2.wav">
-      Download reference
-     </a>
-     <details>
-      <summary>
-       Reference transcript
-      </summary>
-      <p>
-       Rain is falling outside the old library. The shelves are full of stories, and a small lamp lights the page. Another chapter is waiting to begin.
-      </p>
-     </details>
-    </figure>
-    <figure>
-     <figcaption>
-      Clone · same words
-     </figcaption>
-     <small>
-      AkinVox v1 · predicted delivery
-     </small>
-     <audio controls="" preload="none" src="samples/expressive_same_text_v2.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="samples/expressive_same_text_v2.wav">
-      Download clone
-     </a>
-     <details>
-      <summary>
-       Generated text
-      </summary>
-      <p>
-       Rain is falling outside the old library. The shelves are full of stories, and a small lamp lights the page. Another chapter is waiting to begin.
-      </p>
-     </details>
-    </figure>
-    <figure>
-     <figcaption>
-      Clone · new sentence
-     </figcaption>
-     <small>
-      AkinVox v1 · predicted delivery
-     </small>
-     <audio controls="" preload="none" src="samples/expressive_new_text_v2.wav">
-      Your browser does not support audio.
-     </audio>
-     <a href="samples/expressive_new_text_v2.wav">
-      Download clone
-     </a>
-     <details>
-      <summary>
-       Generated text
-      </summary>
-      <p>
-       The museum opens early on Saturday. Visitors can explore the new exhibition and discover how these remarkable inventions changed everyday life.
-      </p>
-     </details>
-    </figure>
-   </div>
-  </section>
-  <section aria-labelledby="weakness-more" class="section expanded-weakness">
-   <div class="eyebrow">
-    More listening examples
-   </div>
-   <h2 id="weakness-more">
-    Two more weakness comparisons
-   </h2>
-   <p class="note">
-    The same words are used on both sides, making delivery and pronunciation differences easier to compare. Whispering and accent preservation remain limitations alongside the slow expressive example above.
-   </p>
    <details class="comparison">
     <summary>
      <strong>
-      Whisper preservation
+      Quick-start example
      </strong>
+     · Stock Kokoro af_heart
     </summary>
     <p class="note">
-     Compare breathiness and voicing: v1 can turn a whispered reference into more normally voiced speech.
+     The synthetic reference included in the installation guide.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/whisper_reference_v2.wav">
+      <audio controls="" preload="none" src="examples/reference.wav">
       </audio>
-      <a href="samples/whisper_reference_v2.wav">
+      <a href="examples/reference.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.
+       </p>
+      </details>
+     </figure>
+     <figure>
+      <figcaption>
+       2. Clone · same sentence
+      </figcaption>
+      <audio controls="" preload="none" src="samples/neutral_same.wav">
+      </audio>
+      <a href="samples/neutral_same.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.
+       </p>
+      </details>
+     </figure>
+     <figure>
+      <figcaption>
+       3. Clone · different sentence
+      </figcaption>
+      <audio controls="" preload="none" src="samples/neutral_new.wav">
+      </audio>
+      <a href="samples/neutral_new.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        Welcome to AkinVox. Today, we are trying a new voice and telling a different story.
+       </p>
+      </details>
+     </figure>
+    </div>
+   </details>
+  </section>
+  <section aria-labelledby="weakness" class="section">
+   <h2 id="weakness">
+    Weaknesses
+   </h2>
+   <details class="comparison">
+    <summary>
+     <strong>
+      Expressive delivery
+     </strong>
+     · Deep, quiet American man
+    </summary>
+    <p class="note">
+     Pace, breathiness and emphasis can drift.
+    </p>
+    <div class="players three">
+     <figure>
+      <figcaption>
+       1. Reference
+      </figcaption>
+      <audio controls="" preload="none" src="samples/expression_reference.wav">
+      </audio>
+      <a href="samples/expression_reference.wav">
        Download audio
       </a>
       <details>
@@ -733,11 +641,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/whisper_clone_v2.wav">
+      <audio controls="" preload="none" src="samples/expression_same.wav">
       </audio>
-      <a href="samples/whisper_clone_v2.wav">
+      <a href="samples/expression_same.wav">
        Download audio
       </a>
       <details>
@@ -751,11 +659,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/whisper_new_text.wav">
+      <audio controls="" preload="none" src="samples/expression_new.wav">
       </audio>
-      <a href="samples/whisper_new_text.wav">
+      <a href="samples/expression_new.wav">
        Download audio
       </a>
       <details>
@@ -764,6 +672,73 @@ footer {
        </summary>
        <p>
         The museum opens early on Saturday. Visitors can explore the new exhibition and discover how these remarkable inventions changed everyday life.
+       </p>
+      </details>
+     </figure>
+    </div>
+   </details>
+   <details class="comparison">
+    <summary>
+     <strong>
+      Whisper preservation
+     </strong>
+     · Whispering woman
+    </summary>
+    <p class="note">
+     Whispered delivery can become normally voiced speech.
+    </p>
+    <div class="players three">
+     <figure>
+      <figcaption>
+       1. Reference
+      </figcaption>
+      <audio controls="" preload="none" src="samples/whisper_reference.wav">
+      </audio>
+      <a href="samples/whisper_reference.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        A thin layer of snow covers the garden. Beyond the glass, a robin rests on the fence. The whole morning feels still and quiet.
+       </p>
+      </details>
+     </figure>
+     <figure>
+      <figcaption>
+       2. Clone · same sentence
+      </figcaption>
+      <audio controls="" preload="none" src="samples/whisper_same.wav">
+      </audio>
+      <a href="samples/whisper_same.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        A thin layer of snow covers the garden. Beyond the glass, a robin rests on the fence. The whole morning feels still and quiet.
+       </p>
+      </details>
+     </figure>
+     <figure>
+      <figcaption>
+       3. Clone · different sentence
+      </figcaption>
+      <audio controls="" preload="none" src="samples/whisper_new.wav">
+      </audio>
+      <a href="samples/whisper_new.wav">
+       Download audio
+      </a>
+      <details>
+       <summary>
+        Transcript
+       </summary>
+       <p>
+        The clock in the hallway has stopped. I can hear the soft rustle of pages as someone turns to the next chapter. Outside, the last light is fading.
        </p>
       </details>
      </figure>
@@ -774,18 +749,19 @@ footer {
      <strong>
       Accent preservation
      </strong>
+     · Australian man
     </summary>
     <p class="note">
-     Compare the vowels in car, water, work and boat. This release uses a US-English phonemizer; preserving a reference accent is not guaranteed.
+     The original accent may not carry over.
     </p>
     <div class="players three">
      <figure>
       <figcaption>
-       Reference · synthetic Qwen
+       1. Reference
       </figcaption>
-      <audio controls="" preload="none" src="samples/australian_reference.wav">
+      <audio controls="" preload="none" src="samples/accent_reference.wav">
       </audio>
-      <a href="samples/australian_reference.wav">
+      <a href="samples/accent_reference.wav">
        Download audio
       </a>
       <details>
@@ -799,11 +775,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · same words
+       2. Clone · same sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/accent_clone.wav">
+      <audio controls="" preload="none" src="samples/accent_same.wav">
       </audio>
-      <a href="samples/accent_clone.wav">
+      <a href="samples/accent_same.wav">
        Download audio
       </a>
       <details>
@@ -817,11 +793,11 @@ footer {
      </figure>
      <figure>
       <figcaption>
-       Clone · new words
+       3. Clone · different sentence
       </figcaption>
-      <audio controls="" preload="none" src="samples/accent_new_text.wav">
+      <audio controls="" preload="none" src="samples/accent_new.wav">
       </audio>
-      <a href="samples/accent_new_text.wav">
+      <a href="samples/accent_new.wav">
        Download audio
       </a>
       <details>
@@ -829,7 +805,7 @@ footer {
         Transcript
        </summary>
        <p>
-        The museum opens early on Saturday. Visitors can explore the new exhibition and discover how these remarkable inventions changed everyday life.
+        After work, we drove past the harbour and stopped for a walk along the water. The boat was already gone, so we bought a coffee and watched the clouds roll in.
        </p>
       </details>
      </figure>

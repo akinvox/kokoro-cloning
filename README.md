@@ -9,12 +9,12 @@ The release includes the **100k production adapter**, reference mapper and refer
 
 [Open the side-by-side listening page](https://akinvox.github.io/kokoro-cloning/) or use the files below. All audio, including the references, is **AI-generated**.
 
-| Example | Reference | Clone · same words | Clone · new words |
-|---|---|---|---|
-| Clean neutral | [Reference](examples/reference.wav) | [Same words](samples/neutral_same_text.wav) | [New words](samples/neutral_clone.wav) |
-| Slow expressive | [Reference](samples/expressive_reference_v2.wav) | [Same words](samples/expressive_same_text_v2.wav) | [New words](samples/expressive_new_text_v2.wav) |
+The samples cover five distinct reference voices and passages: warm narration,
+lively dialogue, a sustained longer passage, factual explanation, and questions.
+Each includes the reference, a same-sentence clone and a different-sentence clone.
+The page also includes the quick-start voice and separate expression, whisper
+and accent limitations. No audio file is repeated across examples.
 
-The listening page also includes **five more new-text examples** from two non-stock synthetic voices, plus **whisper and accent weakness comparisons**. Every example includes both same-word and new-word clones.
 
 V1 supports reference-to-new-text speech, reusable enrollment and an unchanged stock mode. Expressive fidelity and consistency across speakers remain limitations. These examples let you hear both the workflow and its limits; they are not a broad quality benchmark. [Transcripts, provenance and reproduction](samples/README.md).
 
