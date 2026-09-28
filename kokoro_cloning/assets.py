@@ -7,7 +7,7 @@ from pathlib import Path
 from huggingface_hub import hf_hub_download, snapshot_download
 
 MODEL_REPO = "AKinvox/kokoro-cloning-v1"
-MODEL_REVISION = "v1.0.0"
+MODEL_REVISION = "v1.0.1"
 BASE_REPO = "hexgrad/Kokoro-82M"
 BASE_REVISION = "f3ff3571791e39611d31c381e3a41a3af07b4987"
 BASE_SHA256 = "496dba118d1a58f5f3db2efc88dbdc216e0483fc89fe6e47ee1f2c53f18ad1e4"
@@ -45,7 +45,10 @@ def release_assets(model_dir=None, *, local_files_only=False):
             )
         )
 
-    config = json.loads(verify(get("adapter_config.json"), CONFIG_SHA256).read_text())
+    config_name = "config.json"
+    if model_dir is not None and not (Path(model_dir) / config_name).is_file():
+        config_name = "adapter_config.json"  # Support existing offline bundles.
+    config = json.loads(verify(get(config_name), CONFIG_SHA256).read_text())
     if (
         config["format"] != "akinvox-kokoro-cloning-adapter-v1"
         or config["update"] != 100000

@@ -13,7 +13,7 @@ It is the completed production run, not a later experimental research model.
 | Mode switching | Stock restored exactly after toggling; cloning output unchanged through on/off/on |
 | Clean installation | Isolated Python 3.10 environment, PyTorch 2.6 CPU, fresh model cache; both documented CLI examples completed |
 | Browser demo | Reference cloning and stock-mode requests completed; test server exited afterward |
-| Listening page | 19 players covering 16 unique audio files loaded in Chromium; desktop and 390px mobile layouts checked |
+| Listening page | 27 players covering 21 unique audio files loaded in Chromium; desktop and 390px mobile layouts checked |
 
 Comparisons use matched text, conditioning, seed and execution environment.
 Full-state/export parity was checked together on PyTorch 2.12 CPU; the public

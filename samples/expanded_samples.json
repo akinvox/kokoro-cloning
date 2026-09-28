@@ -183,5 +183,77 @@
       "clipped_fraction": 0.0
     }
   ],
-  "qualification": "Illustrative examples for listening, not a broad identity or accent benchmark"
+  "qualification": "Illustrative examples for listening, not a broad identity or accent benchmark",
+  "additional_comparisons": [
+    {
+      "id": "neutral",
+      "file": "samples/neutral_same_text.wav",
+      "reference": "examples/reference.wav",
+      "reference_sha256": "42b40bf578c538a767a545b99b1baa5570dd0397c4f1ab4d49ba3af401f49f32",
+      "reference_text": "I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.",
+      "text": "I love getting lost in a good audiobook. Every story opens a new world, and a familiar voice makes the journey feel like home.",
+      "same_text": true,
+      "sha256": "09238d06669faac54cbca7a02536fd8cf121c7d7de9b9a236dff4da3708725d4",
+      "seconds": 8.4,
+      "sample_rate": 24000,
+      "peak": 0.49639892578125,
+      "clipped_fraction": 0.0
+    },
+    {
+      "id": "warm",
+      "file": "samples/warm_same_text.wav",
+      "reference": "samples/warm_reference.wav",
+      "reference_sha256": "0ce1cc63d68c304c2cc6dd50fadd0fd49e7594078d503e89b9436b5dac07ff1e",
+      "reference_text": "The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.",
+      "text": "The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.",
+      "same_text": true,
+      "sha256": "37f542f8210e32aa15bb2c7fd28c32462c1cb129d135a1479d3abbc25b03060c",
+      "seconds": 8.575,
+      "sample_rate": 24000,
+      "peak": 0.5751953125,
+      "clipped_fraction": 0.0
+    },
+    {
+      "id": "clear",
+      "file": "samples/clear_same_text.wav",
+      "reference": "samples/clear_reference.wav",
+      "reference_sha256": "a65da5e792a2918352cb5bad78cd5149e37f39de6856901c9bad5d1cff59a315",
+      "reference_text": "The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.",
+      "text": "The morning sunlight filled the room. I opened the window, took a quiet breath, and smiled at the beautiful day ahead.",
+      "same_text": true,
+      "sha256": "16b9c6b0011f25fbeaa5a387f8af175e43c4b3d2fa67dd09f5af498eeb9a534f",
+      "seconds": 7.35,
+      "sample_rate": 24000,
+      "peak": 0.678802490234375,
+      "clipped_fraction": 0.0
+    },
+    {
+      "id": "whisper",
+      "file": "samples/whisper_new_text.wav",
+      "reference": "samples/whisper_reference_v2.wav",
+      "reference_sha256": "40efe8566d8aa275a2b851e226e2c5e4ba26747fc8bce1b577930e0a527be2fa",
+      "reference_text": "Rain is falling outside the old library. The shelves are full of stories, and a small lamp lights the page. Another chapter is waiting to begin.",
+      "text": "The museum opens early on Saturday. Visitors can explore the new exhibition and discover how these remarkable inventions changed everyday life.",
+      "same_text": false,
+      "sha256": "ec0a123ffb1b1768e31d5c72b4b48a7b5f6ff9186ff1e893ada422337f102559",
+      "seconds": 10.4,
+      "sample_rate": 24000,
+      "peak": 0.546112060546875,
+      "clipped_fraction": 0.0
+    },
+    {
+      "id": "accent",
+      "file": "samples/accent_new_text.wav",
+      "reference": "samples/australian_reference.wav",
+      "reference_sha256": "e9013cded79a2dcbd2a4cfcb8e96da0b3b1c53bb9a1f3bb341abb6b3fdfbbecf",
+      "reference_text": "I parked the car near the water, then walked down to the beach. We can meet after work and take the boat home.",
+      "text": "The museum opens early on Saturday. Visitors can explore the new exhibition and discover how these remarkable inventions changed everyday life.",
+      "same_text": false,
+      "sha256": "220fddd00303d062f904660b91b684254d7f1533f2da9b2aa91cc0bd66a7c57d",
+      "seconds": 9.425,
+      "sample_rate": 24000,
+      "peak": 0.58087158203125,
+      "clipped_fraction": 0.0
+    }
+  ]
 }

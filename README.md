@@ -9,13 +9,12 @@ The release includes the **100k production adapter**, reference mapper and refer
 
 [Open the side-by-side listening page](https://akinvox.github.io/kokoro-cloning/) or use the files below. All audio, including the references, is **AI-generated**.
 
-| Example | Reference | Clone | Listen for |
+| Example | Reference | Clone · same words | Clone · new words |
 |---|---|---|---|
-| Clean neutral, new words | [Reference](examples/reference.wav) | [Clone](samples/neutral_clone.wav) | Voice character and new-sentence speech; the quick-start example |
-| Slow expressive, same words | [Reference](samples/expressive_reference_v2.wav) | [Clone](samples/expressive_same_text_v2.wav) | Differences in pauses, stretched words and breathiness |
-| Slow expressive, new words | [Reference](samples/expressive_reference_v2.wav) | [Clone](samples/expressive_new_text_v2.wav) | Delivery and identity when the words change |
+| Clean neutral | [Reference](examples/reference.wav) | [Same words](samples/neutral_same_text.wav) | [New words](samples/neutral_clone.wav) |
+| Slow expressive | [Reference](samples/expressive_reference_v2.wav) | [Same words](samples/expressive_same_text_v2.wav) | [New words](samples/expressive_new_text_v2.wav) |
 
-The listening page also includes **five more new-text examples** from two non-stock synthetic voices, plus **whisper and accent weakness comparisons**.
+The listening page also includes **five more new-text examples** from two non-stock synthetic voices, plus **whisper and accent weakness comparisons**. Every example includes both same-word and new-word clones.
 
 V1 supports reference-to-new-text speech, reusable enrollment and an unchanged stock mode. Expressive fidelity and consistency across speakers remain limitations. These examples let you hear both the workflow and its limits; they are not a broad quality benchmark. [Transcripts, provenance and reproduction](samples/README.md).
 
@@ -100,7 +99,7 @@ Open the localhost address printed in the terminal. Upload a reference, enter it
 | `adapter.pt` | Switchable low-rank updates for native Kokoro inference |
 | `reference_mapper.pt` | Maps reference observations into voice conditioning and reference memory |
 | `reference_encoders.pt` | Required frozen acoustic reference encoders |
-| `adapter_config.json` | Architecture, adapter targets, pinned dependencies and checksums |
+| `config.json` | Architecture, adapter targets, pinned dependencies and checksums |
 
 The three weight files total about **202 MB**. The runtime separately downloads pinned [Kokoro v1.0](https://huggingface.co/hexgrad/Kokoro-82M) and [WavLM speaker features](https://huggingface.co/microsoft/wavlm-base-plus-sv). There are no merged backbone weights, training scripts, optimizer states or training datasets in this release.
 

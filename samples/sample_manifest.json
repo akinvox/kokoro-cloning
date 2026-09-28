@@ -114,6 +114,41 @@
       "sample_rate": 24000,
       "peak": 0.568267822265625,
       "clipped_fraction": 0.0
+    },
+    "samples/neutral_same_text.wav": {
+      "sha256": "09238d06669faac54cbca7a02536fd8cf121c7d7de9b9a236dff4da3708725d4",
+      "seconds": 8.4,
+      "sample_rate": 24000,
+      "peak": 0.49639892578125,
+      "clipped_fraction": 0.0
+    },
+    "samples/warm_same_text.wav": {
+      "sha256": "37f542f8210e32aa15bb2c7fd28c32462c1cb129d135a1479d3abbc25b03060c",
+      "seconds": 8.575,
+      "sample_rate": 24000,
+      "peak": 0.5751953125,
+      "clipped_fraction": 0.0
+    },
+    "samples/clear_same_text.wav": {
+      "sha256": "16b9c6b0011f25fbeaa5a387f8af175e43c4b3d2fa67dd09f5af498eeb9a534f",
+      "seconds": 7.35,
+      "sample_rate": 24000,
+      "peak": 0.678802490234375,
+      "clipped_fraction": 0.0
+    },
+    "samples/whisper_new_text.wav": {
+      "sha256": "ec0a123ffb1b1768e31d5c72b4b48a7b5f6ff9186ff1e893ada422337f102559",
+      "seconds": 10.4,
+      "sample_rate": 24000,
+      "peak": 0.546112060546875,
+      "clipped_fraction": 0.0
+    },
+    "samples/accent_new_text.wav": {
+      "sha256": "220fddd00303d062f904660b91b684254d7f1533f2da9b2aa91cc0bd66a7c57d",
+      "seconds": 9.425,
+      "sample_rate": 24000,
+      "peak": 0.58087158203125,
+      "clipped_fraction": 0.0
     }
   },
   "all_audio_synthetic": true
