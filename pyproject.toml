@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "akinvox-kokoro-cloning"
-version = "1.0.0"
+version = "1.0.1"
 description = "Reference-audio cloning for Kokoro with an optional LoRA adapter"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"

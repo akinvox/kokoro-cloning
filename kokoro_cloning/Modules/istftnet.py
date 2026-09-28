@@ -1,15 +1,14 @@
-import torch
-import torch.nn.functional as F
-import torch.nn as nn
-from torch.nn import Conv1d, ConvTranspose1d, AvgPool1d, Conv2d
-from torch.nn.utils.parametrizations import weight_norm
-from torch.nn.utils.parametrize import remove_parametrizations
-from .utils import init_weights, get_padding
-
 import math
-import random
+
 import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 from scipy.signal import get_window
+from torch.nn import Conv1d, ConvTranspose1d
+from torch.nn.utils.parametrizations import weight_norm
+
+from .utils import get_padding, init_weights
 
 LRELU_SLOPE = 0.1
 
@@ -138,12 +137,6 @@ class AdaINResBlock1(torch.nn.Module):
             x = xt + x
         return x
 
-    def remove_weight_norm(self):
-        for l in self.convs1:
-            remove_parametrizations(l, "weight")
-        for l in self.convs2:
-            remove_parametrizations(l, "weight")
-
 
 class TorchSTFT(torch.nn.Module):
     def __init__(
@@ -182,27 +175,9 @@ class TorchSTFT(torch.nn.Module):
             -2
         )  # unsqueeze to stay consistent with conv_transpose1d implementation
 
-    def forward(self, input_data):
-        self.magnitude, self.phase = self.transform(input_data)
-        reconstruction = self.inverse(self.magnitude, self.phase)
-        return reconstruction
-
 
 class SineGen(torch.nn.Module):
-    """Definition of sine generator
-    SineGen(samp_rate, harmonic_num = 0,
-            sine_amp = 0.1, noise_std = 0.003,
-            voiced_threshold = 0,
-            flag_for_pulse=False)
-    samp_rate: sampling rate in Hz
-    harmonic_num: number of harmonic overtones (default 0)
-    sine_amp: amplitude of sine-wavefrom (default 0.1)
-    noise_std: std of Gaussian noise (default 0.003)
-    voiced_thoreshold: F0 threshold for U/V classification (default 0)
-    flag_for_pulse: this SinGen is used inside PulseGen (default False)
-    Note: when flag_for_pulse is True, the first time step of a voiced
-        segment is always sin(np.pi) or cos(0)
-    """
+    """Generate harmonic excitation from an F0 contour, with voiced/unvoiced noise."""
 
     def __init__(
         self,
@@ -212,7 +187,6 @@ class SineGen(torch.nn.Module):
         sine_amp=0.1,
         noise_std=0.003,
         voiced_threshold=0,
-        flag_for_pulse=False,
     ):
         super(SineGen, self).__init__()
         self.sine_amp = sine_amp
@@ -221,7 +195,6 @@ class SineGen(torch.nn.Module):
         self.dim = self.harmonic_num + 1
         self.sampling_rate = samp_rate
         self.voiced_threshold = voiced_threshold
-        self.flag_for_pulse = flag_for_pulse
         self.upsample_scale = upsample_scale
 
     def _f02uv(self, f0):
@@ -233,7 +206,7 @@ class SineGen(torch.nn.Module):
         """f0_values: (batchsize, length, dim)
         where dim indicates fundamental tone and overtones
         """
-        # convert to F0 in rad. The interger part n can be ignored
+        # convert to F0 in rad. The integer part n can be ignored
         # because 2 * np.pi * n doesn't affect phase
         rad_values = (f0_values / self.sampling_rate) % 1
 
@@ -244,67 +217,20 @@ class SineGen(torch.nn.Module):
         rand_ini[:, 0] = 0
         rad_values[:, 0, :] = rad_values[:, 0, :] + rand_ini
 
-        # instantanouse phase sine[t] = sin(2*pi \sum_i=1 ^{t} rad)
-        if not self.flag_for_pulse:
-            #             # for normal case
+        # Integrate F0 into phase before restoring the waveform sample rate.
+        rad_values = torch.nn.functional.interpolate(
+            rad_values.transpose(1, 2),
+            scale_factor=1 / self.upsample_scale,
+            mode="linear",
+        ).transpose(1, 2)
 
-            #             # To prevent torch.cumsum numerical overflow,
-            #             # it is necessary to add -1 whenever \sum_k=1^n rad_value_k > 1.
-            #             # Buffer tmp_over_one_idx indicates the time step to add -1.
-            #             # This will not change F0 of sine because (x-1) * 2*pi = x * 2*pi
-            #             tmp_over_one = torch.cumsum(rad_values, 1) % 1
-            #             tmp_over_one_idx = (padDiff(tmp_over_one)) < 0
-            #             cumsum_shift = torch.zeros_like(rad_values)
-            #             cumsum_shift[:, 1:, :] = tmp_over_one_idx * -1.0
-
-            #             phase = torch.cumsum(rad_values, dim=1) * 2 * np.pi
-            rad_values = torch.nn.functional.interpolate(
-                rad_values.transpose(1, 2),
-                scale_factor=1 / self.upsample_scale,
-                mode="linear",
-            ).transpose(1, 2)
-
-            #             tmp_over_one = torch.cumsum(rad_values, 1) % 1
-            #             tmp_over_one_idx = (padDiff(tmp_over_one)) < 0
-            #             cumsum_shift = torch.zeros_like(rad_values)
-            #             cumsum_shift[:, 1:, :] = tmp_over_one_idx * -1.0
-
-            phase = torch.cumsum(rad_values, dim=1) * 2 * np.pi
-            phase = torch.nn.functional.interpolate(
-                phase.transpose(1, 2) * self.upsample_scale,
-                scale_factor=self.upsample_scale,
-                mode="linear",
-            ).transpose(1, 2)
-            sines = torch.sin(phase)
-
-        else:
-            # If necessary, make sure that the first time step of every
-            # voiced segments is sin(pi) or cos(0)
-            # This is used for pulse-train generation
-
-            # identify the last time step in unvoiced segments
-            uv = self._f02uv(f0_values)
-            uv_1 = torch.roll(uv, shifts=-1, dims=1)
-            uv_1[:, -1, :] = 1
-            u_loc = (uv < 1) * (uv_1 > 0)
-
-            # get the instantanouse phase
-            tmp_cumsum = torch.cumsum(rad_values, dim=1)
-            # different batch needs to be processed differently
-            for idx in range(f0_values.shape[0]):
-                temp_sum = tmp_cumsum[idx, u_loc[idx, :, 0], :]
-                temp_sum[1:, :] = temp_sum[1:, :] - temp_sum[0:-1, :]
-                # stores the accumulation of i.phase within
-                # each voiced segments
-                tmp_cumsum[idx, :, :] = 0
-                tmp_cumsum[idx, u_loc[idx, :, 0], :] = temp_sum
-
-            # rad_values - tmp_cumsum: remove the accumulation of i.phase
-            # within the previous voiced segment.
-            i_phase = torch.cumsum(rad_values - tmp_cumsum, dim=1)
-
-            # get the sines
-            sines = torch.cos(i_phase * 2 * np.pi)
+        phase = torch.cumsum(rad_values, dim=1) * 2 * np.pi
+        phase = torch.nn.functional.interpolate(
+            phase.transpose(1, 2) * self.upsample_scale,
+            scale_factor=self.upsample_scale,
+            mode="linear",
+        ).transpose(1, 2)
+        sines = torch.sin(phase)
         return sines
 
     def forward(self, f0):
@@ -314,7 +240,6 @@ class SineGen(torch.nn.Module):
         output sine_tensor: tensor(batchsize=1, length, dim)
         output uv: tensor(batchsize=1, length, 1)
         """
-        f0_buf = torch.zeros(f0.shape[0], f0.shape[1], self.dim, device=f0.device)
         # fundamental component
         fn = torch.multiply(
             f0, torch.FloatTensor([[range(1, self.harmonic_num + 2)]]).to(f0.device)
@@ -324,12 +249,9 @@ class SineGen(torch.nn.Module):
         sine_waves = self._f02sine(fn) * self.sine_amp
 
         # generate uv signal
-        # uv = torch.ones(f0.shape)
-        # uv = uv * (f0 > self.voiced_threshold)
         uv = self._f02uv(f0)
 
         # noise: for unvoiced should be similar to sine_amp
-        #        std = self.sine_amp/3 -> max value ~ self.sine_amp
         # .       for voiced regions is self.noise_std
         noise_amp = uv * self.noise_std + (1 - uv) * self.sine_amp / 3
         noise = noise_amp * torch.randn_like(sine_waves)
@@ -401,12 +323,6 @@ class SourceModuleHnNSF(torch.nn.Module):
         # source for noise branch, in the same shape as uv
         noise = torch.randn_like(uv) * self.sine_amp / 3
         return sine_merge, noise, uv
-
-
-def padDiff(x):
-    return F.pad(
-        F.pad(x, (0, 0, -1, 1), "constant", 0) - x, (0, 0, 0, -1), "constant", 0
-    )
 
 
 class Generator(torch.nn.Module):
@@ -523,32 +439,6 @@ class Generator(torch.nn.Module):
         spec = torch.exp(x[:, : self.post_n_fft // 2 + 1, :])
         phase = torch.sin(x[:, self.post_n_fft // 2 + 1 :, :])
         return self.stft.inverse(spec, phase)
-
-    def fw_phase(self, x, s):
-        for i in range(self.num_upsamples):
-            x = F.leaky_relu(x, LRELU_SLOPE)
-            x = self.ups[i](x)
-            xs = None
-            for j in range(self.num_kernels):
-                if xs is None:
-                    xs = self.resblocks[i * self.num_kernels + j](x, s)
-                else:
-                    xs += self.resblocks[i * self.num_kernels + j](x, s)
-            x = xs / self.num_kernels
-        x = F.leaky_relu(x)
-        x = self.reflection_pad(x)
-        x = self.conv_post(x)
-        spec = torch.exp(x[:, : self.post_n_fft // 2 + 1, :])
-        phase = torch.sin(x[:, self.post_n_fft // 2 + 1 :, :])
-        return spec, phase
-
-    def remove_weight_norm(self):
-        print("Removing weight norm...")
-        for l in self.ups:
-            remove_parametrizations(l, "weight")
-        for l in self.resblocks:
-            l.remove_weight_norm()
-        remove_parametrizations(self.conv_post, "weight")
 
 
 class AdainResBlk1d(nn.Module):

@@ -1,16 +1,4 @@
-"""
-Kokoro-82M Symbol Mapping for StyleTTS2
-=========================================
-Auto-generated from Kokoro-82M config.json.
-Replaces StyleTTS2's default symbol list in text_utils.py and meldataset.py.
-
-CRITICAL: Kokoro and StyleTTS2 use different index assignments for the same
-178-token vocabulary. This file provides the exact mapping that matches
-Kokoro-82M's pre-trained embeddings.
-
-Usage in StyleTTS2:
-  from kokoro_symbols import symbols, dicts
-"""
+"""Phoneme IDs matching the original Kokoro vocabulary."""
 
 # fmt: off
 # Kokoro-82M vocabulary: 178 tokens (index 0 = pad, gaps filled with PUA chars)
@@ -206,6 +194,7 @@ def unknown_symbols(text):
 
 class TextCleaner:
     """Drop-in replacement for StyleTTS2's TextCleaner using Kokoro vocab."""
+
     def __init__(self, dummy=0, strict=True):
         self.word_index_dictionary = dicts
         self.strict = strict
@@ -213,10 +202,8 @@ class TextCleaner:
     def __call__(self, text):
         unknown = unknown_symbols(text)
         if unknown and self.strict:
-            formatted = ', '.join(
-                f'{char!r} (U+{ord(char):04X})' for char in unknown
-            )
-            raise ValueError(f'Unsupported phoneme symbols: {formatted}')
+            formatted = ", ".join(f"{char!r} (U+{ord(char):04X})" for char in unknown)
+            raise ValueError(f"Unsupported phoneme symbols: {formatted}")
         return [
             self.word_index_dictionary[char]
             for char in text

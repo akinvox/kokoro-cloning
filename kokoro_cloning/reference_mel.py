@@ -1,8 +1,12 @@
 import torch
 import torchaudio
-mean=-4
-std=4
-to_mel=torchaudio.transforms.MelSpectrogram(n_mels=80,n_fft=2048,win_length=1200,hop_length=300)
+
+mean = -4
+std = 4
+to_mel = torchaudio.transforms.MelSpectrogram(
+    n_mels=80, n_fft=2048, win_length=1200, hop_length=300
+)
+
 
 def preprocess(wave):
     wave_tensor = torch.from_numpy(wave).float()

@@ -1,12 +1,18 @@
 import math
+
 import torch
-from torch import nn
 import torch.nn.functional as F
+from torch import nn
+
 
 def positions(count, width, device, dtype):
     pos = torch.arange(count, device=device, dtype=dtype)[:, None]
-    freq = torch.exp(torch.arange(0, width, 2, device=device, dtype=dtype) * (-math.log(10000.0) / width))
+    freq = torch.exp(
+        torch.arange(0, width, 2, device=device, dtype=dtype)
+        * (-math.log(10000.0) / width)
+    )
     return torch.stack((torch.sin(pos * freq), torch.cos(pos * freq)), -1).flatten(-2)
+
 
 class ReferenceTranscript(nn.Module):
     """Enrollment-only reference phonemes -> acoustic memory residual."""
@@ -24,27 +30,35 @@ class ReferenceTranscript(nn.Module):
     def forward(self, acoustic, acoustic_mask, phones, phone_mask):
         assert phones.ndim == 2 and phone_mask.shape == phones.shape
         assert phones.dtype == torch.long and phone_mask.dtype == torch.bool
-        assert not bool(phone_mask.all(1).any()), 'Empty reference transcript'
+        assert not bool(phone_mask.all(1).any()), "Empty reference transcript"
         assert len(phones) == len(acoustic)
         assert bool(((phones >= 0) & (phones < self.embedding.num_embeddings)).all())
         text = self.embedding(phones)
-        text = self.text_norm(text + positions(text.shape[1], text.shape[2], text.device, text.dtype))
-        (delta, _) = self.attention(self.acoustic_norm(acoustic), text, text, key_padding_mask=phone_mask, need_weights=False)
+        text = self.text_norm(
+            text + positions(text.shape[1], text.shape[2], text.device, text.dtype)
+        )
+        (delta, _) = self.attention(
+            self.acoustic_norm(acoustic),
+            text,
+            text,
+            key_padding_mask=phone_mask,
+            need_weights=False,
+        )
         delta = self.output(delta).masked_fill(acoustic_mask[..., None], 0)
         return acoustic + delta
 
+
 def attach_reference_text(shared):
-    """Attach without consuming the retained model's RNG stream."""
+    """Initialize transcript conditioning without changing the caller’s random state."""
     with torch.random.fork_rng(devices=[]):
         torch.random.default_generator.manual_seed(20260917)
         shared.reference_transcript = ReferenceTranscript()
     return shared
 
+
 def encode_reference(shared, mel, lengths, phones=None, phone_mask=None):
-    """The retained encoder's operations, with one declared zero bridge."""
-    if not hasattr(shared, 'reference_transcript'):
-        return shared.encode(mel, lengths)
-    assert phones is not None and phone_mask is not None, 'Reference transcript missing'
+    """Encode reference audio and its transcript into acoustic memory."""
+    assert phones is not None and phone_mask is not None, "Reference transcript missing"
     assert mel.ndim == 3 and mel.shape[1] == 80
     assert bool((lengths > 0).all()) and bool((lengths <= mel.shape[-1]).all())
     mask = shared.mask(lengths, mel.shape[-1])
@@ -56,10 +70,15 @@ def encode_reference(shared, mel, lengths, phones=None, phone_mask=None):
     mask = shared.mask(lengths, x.shape[-1])
     x = shared.norm(x.transpose(1, 2))
     x = shared.reference_transcript(x, mask, phones, phone_mask)
-    x = shared.sequence(x + positions(x.shape[1], 192, x.device, x.dtype)[None], src_key_padding_mask=mask)
+    x = shared.sequence(
+        x + positions(x.shape[1], 192, x.device, x.dtype)[None],
+        src_key_padding_mask=mask,
+    )
     x = x.masked_fill(mask[..., None], 0)
     denom = lengths[:, None].to(x.dtype)
     mean = x.sum(1) / denom
-    variance = (x - mean[:, None]).square().masked_fill(mask[..., None], 0).sum(1) / denom
+    variance = (x - mean[:, None]).square().masked_fill(mask[..., None], 0).sum(
+        1
+    ) / denom
     stats = torch.cat((mean, variance.clamp_min(1e-08).sqrt()), -1)
     return (x, mask, stats)

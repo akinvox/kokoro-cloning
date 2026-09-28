@@ -47,4 +47,4 @@ Five examples from two non-stock synthetic voices; listening examples, not a bro
 - **Whisper preservation:** [reference](whisper_reference_v2.wav) / [same-text clone](whisper_clone_v2.wav). Compare breathiness and voicing: v1 can turn a whispered reference into more normally voiced speech.
 - **Accent preservation:** [reference](australian_reference.wav) / [same-text clone](accent_clone.wav). Compare the vowels in car, water, work and boat. This release uses a US-English phonemizer; preserving a reference accent is not guaranteed.
 
-Reference transcripts are supplied alongside each WAV. `expanded_samples.json` records the target texts, original synthetic-reference provenance, release update and audio hashes. No existing comparison has been removed.
+Reference transcripts are supplied alongside each WAV. `expanded_samples.json` records the target texts, original synthetic-reference provenance, release update and audio hashes.
