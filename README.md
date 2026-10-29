@@ -47,7 +47,18 @@ Open `clone.wav`. The example reference is **AI-generated stock Kokoro speech**,
 
 ### 3. Use your own voice
 
-Record one speaker for **5–15 seconds** in a quiet room. Use a WAV file with at least 3 seconds of actual speech and at most 30 seconds total. Save the exact words spoken in `reference.txt`, then run:
+For best results, use a **3–10 second reference** of one speaker in a quiet room. Keep at least **3 seconds of real speech** and no more than **10 seconds total** in the final clip. Choose a complete short sentence with the voice and delivery you want to reproduce; silence does not count toward the minimum.
+
+#### Reference preparation used in AkinVox production
+
+1. Denoise with **DeepFilterNet3 at 48 kHz**, then resample to **24 kHz mono**.
+2. Use **Silero VAD** to trim leading and trailing silence, keeping a little padding around speech. Shorten pauses longer than one second to about 300 ms, and select a complete speech or quiet boundary within the 10-second limit.
+3. Normalize the final reference toward **RMS 0.1**, with a **0.99 peak ceiling**. No VoiceFixer, pitch shifting or time stretching is used in this preparation.
+4. **Transcribe the exact final cleaned clip**, then check the words by listening. If you change the crop or denoise it again, recheck the transcript before enrollment.
+
+This is the reference-preparation workflow used in production and the recommended starting point for your own tests. Denoising, VAD trimming and transcription are preprocessing steps; run them before passing the final file to this package. They are not automatically added by the CLI or browser demo. Keep recordings free of music, overlapping voices, clipping and heavy reverb.
+
+Save the exact words from the prepared clip in `reference.txt`, then run:
 
 ```bash
 kokoro-clone --reference reference.wav --reference-text-file reference.txt --text "This is a new sentence in the reference voice." --output clone.wav
@@ -109,7 +120,7 @@ We adapted Kokoro using LoRA while keeping its original backbone tensors frozen.
 
 - V1 supports **English voice cloning**.
 - Strong emotion, shouting, whispering, singing and highly expressive references can be difficult to follow. Identity, accent and delivery may drift.
-- Noise, music, several speakers, very short references and inaccurate transcripts reduce quality. The speech detector may reject weak or unusual speech; try a longer clean recording.
+- Noise, music, several speakers, very short references and inaccurate transcripts reduce quality. The speech detector may reject weak or unusual speech; try a clearer spoken excerpt within the recommended 3–10 second range.
 - Names, unusual words and punctuation may need spelling adjustments. Split long passages into sentences; each request must fit the model's 510-token limit.
 - Output is 24 kHz mono. Long-form consistency and reliable transfer to every unseen speaker are not guaranteed. Listen to generated audio before using it.
 - Results can differ across hardware and software versions. Exact stock comparisons use the same seed, voice, text and runtime environment.
